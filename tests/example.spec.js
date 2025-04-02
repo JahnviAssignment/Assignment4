@@ -85,4 +85,42 @@ test.describe('Automation Exercise Website Tests', () => {
     console.log("Test 4: Contact Us page loaded successfully.");
   });
 
+  // Test 5: Check if the footer is visible
+  test('should display the footer', async ({ page }) => {
+    console.log("Test 5: Navigating to homepage to check footer visibility...");
+    await page.goto('https://www.automationexercise.com/');
+
+    // Capture a screenshot of the homepage before checking footer visibility
+    await page.screenshot({ path: 'screenshot_test5_homepage_footer_check.png' });
+
+    const footer = await page.locator('footer');
+    console.log("Test 5: Verifying if footer is visible...");
+    await expect(footer).toBeVisible();
+
+    // Capture a screenshot after verifying footer visibility
+    await page.screenshot({ path: 'screenshot_test5_footer_visible.png' });
+
+    console.log("Test 5: Footer is visible.");
+  });
+
+  // Test 6: Verify that clicking on "View Product" navigates to product details
+  test('should navigate to product details when clicking "View Product"', async ({ page }) => {
+    console.log("Test 6: Navigating to Products page to click on View Product...");
+    await page.goto('https://www.automationexercise.com/products');
+
+    // Capture a screenshot before clicking on "View Product"
+    await page.screenshot({ path: 'screenshot_test6_products_page_before_click.png' });
+
+    const viewProductButton = await page.locator('a[href="/product_details/1"]'); // Change href if necessary
+    console.log("Test 6: Clicking on View Product button...");
+    await viewProductButton.click();
+
+    // Capture a screenshot after clicking the "View Product" button
+    await page.screenshot({ path: 'screenshot_test6_product_details_page_before_url_check.png' });
+
+    console.log("Test 6: Verifying the product details page URL...");
+    await expect(page).toHaveURL(/product_details/); // Verify URL contains /product_details
+    console.log("Test 6: Product details page loaded successfully.");
+  });
+
 });
