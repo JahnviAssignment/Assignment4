@@ -45,4 +45,44 @@ test.describe('Automation Exercise Website Tests', () => {
     console.log("Test 2: Signup / Login button is visible.");
   });
 
+  // Test 3: Verify the "Products" page loads correctly
+  test('should navigate to the "Products" page', async ({ page }) => {
+    console.log("Test 3: Navigating to homepage to click on Products link...");
+    await page.goto('https://www.automationexercise.com/');
+
+    // Capture a screenshot of the homepage before clicking
+    await page.screenshot({ path: 'screenshot_test3_homepage_before_click.png' });
+
+    const productsLink = await page.locator('a[href="/products"]');
+    console.log("Test 3: Clicking on Products link...");
+    await productsLink.click();
+
+    // Capture a screenshot after clicking on the "Products" link
+    await page.screenshot({ path: 'screenshot_test3_products_page_before_url_check.png' });
+
+    console.log("Test 3: Verifying the Products page URL...");
+    await expect(page).toHaveURL(/products/); // Verify URL contains /products
+    console.log("Test 3: Products page loaded successfully.");
+  });
+
+  // Test 4: Verify that the contact page loads correctly
+  test('should load the "Contact Us" page', async ({ page }) => {
+    console.log("Test 4: Navigating to homepage to click on Contact Us link...");
+    await page.goto('https://www.automationexercise.com/');
+
+    // Capture a screenshot of the homepage before clicking
+    await page.screenshot({ path: 'screenshot_test4_homepage_before_click.png' });
+
+    const contactLink = await page.locator('a[href="/contact_us"]');
+    console.log("Test 4: Clicking on Contact Us link...");
+    await contactLink.click();
+
+    // Capture a screenshot after clicking on the "Contact Us" link
+    await page.screenshot({ path: 'screenshot_test4_contact_page_before_url_check.png' });
+
+    console.log("Test 4: Verifying the Contact Us page URL...");
+    await expect(page).toHaveURL(/contact_us/); // Verify URL contains /contact_us
+    console.log("Test 4: Contact Us page loaded successfully.");
+  });
+
 });
